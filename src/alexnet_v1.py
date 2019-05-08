@@ -17,11 +17,21 @@ import numpy as np
 tf.logging.set_verbosity(tf.logging.ERROR)
 
 # Load data
-data_train, info_train = tfds.load(name='oxford_flowers102', split=tfds.Split.TRAIN, data_dir='/app/data/', with_info=True)
-data_validate, info_validate = tfds.load(name='oxford_flowers102', split=tfds.Split.VALIDATION, data_dir='/app/data/', with_info=True)
+data_loader = tfds.load(name='oxford_flowers102', data_dir='/app/data/')
+data_train, data_validation = data_loader["train"], data_loader["validation"]
 
-print(info_train)
-print(info_validate)
+
+for example in tfds.as_numpy(data_train):
+    image, label = example['image'], example['label']
+    # scale and crop to 224x224x3
+    
+# data_exmaple = data_train.take(1)
+# # print(data_exmaple[1])
+# label = data_exmaple['label']
+# print(label.numpy())
+# , info_validate = tfds.load(name='oxford_flowers102', split=tfds.Split.VALIDATION, data_dir='/app/data/', with_info=True)
+
+# print(data_train)
 
 # Make model
 model = tf.keras.Sequential()
@@ -45,8 +55,8 @@ model.add(tf.keras.layers.Dense(4096, 'relu'))
 model.add(tf.keras.layers.Dense(4096, 'relu'))
 model.add(tf.keras.layers.Dense(102, activation='softmax'))
 
-model.summary()
+# model.summary()
 
-model.compile(optimizer=tf.train.GradientDescentOptimizer(0.01), loss='categorical_crossentropy', metric=['accuracy', 'precision'])
+model.compile(optimizer=tf.train.GradientDescentOptimizer(0.01), loss='categorical_crossentropy', metrics=['accuracy'])
 
-model.fit(data_train, batch_size=32, epochs=1, verbose=1, validation_data=data_validate)
+baseline_history = model.fit(data_train, batch_size=32, epochs=10, steps_per_epoch=100, verbose=1, validation_data=data_validation)
