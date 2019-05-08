@@ -1,2 +1,4 @@
 matplotlib
 ptvsd
+tensorflow-datasets
+scipy

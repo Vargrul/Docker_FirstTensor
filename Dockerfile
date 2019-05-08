@@ -7,11 +7,10 @@ COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 # RUN python3 -m pip install --upgrade pip
 
-COPY . /app/
-COPY data /app/data
+COPY ./src /app
+# COPY data /app/data
 
 WORKDIR /app
-
 
 # Set the working directory to /app
 
@@ -19,6 +18,7 @@ WORKDIR /app
 
 # Copy the current directory contents into the container at /app
 
-CMD [ "python3", "tensortest.py" ]
+CMD [ "python3", "alexnet_v1.py" ]
+# CMD [ "python3", "tensortest.py" ]
 
 LABEL maintainer="ksla@create.aau.dk"

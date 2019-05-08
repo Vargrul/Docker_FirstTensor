@@ -1,0 +1,45 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "docker_build",
+            "type": "shell",
+            "command": "docker build -t testimg ."
+        },
+        {
+            "label": "docker_debug_run",
+            "type": "shell",
+            "command": "docker run --rm -it -d -p 7102:7102/tcp testimg",
+            "dependsOn": [
+                "docker_build"
+            ]
+        },
+        {
+            "label": "docker_run",
+            "type": "shell",
+            "command": "docker run --rm -it -p 7102:7102/tcp -v ~/projects/Docker_FirstTensor/data:/app/data testimg",
+            "dependsOn": [
+                "docker_build"
+            ]
+        },
+        {
+
+            "label": "docker",
+            "dependsOn": [
+                "docker_debug_run"
+            ]
+        },
+        {
+            "label": "docker_code_build",
+            "dependsOn": [
+                "docker_run"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

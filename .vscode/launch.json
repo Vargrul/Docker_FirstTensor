@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "configurations": [
+        {
+            "name": "Attach (Remote Debug)",
+            "type": "python",
+            "request": "attach",
+            "localRoot": "${workspaceRoot}",
+            "remoteRoot": "/app",
+            "port": 7102,
+            "console": "integratedTerminal",
+            // "secret": "my_secret",
+            "host": "0.0.0.0",
+            "preLaunchTask": "docker",
+            "internalConsoleOptions":"openOnSessionStart"
+        }
+    ]
+}
