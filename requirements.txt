@@ -2,3 +2,4 @@ matplotlib
 ptvsd
 tensorflow-datasets
 scipy
+opencv-contrib-python
