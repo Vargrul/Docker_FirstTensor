@@ -50,9 +50,18 @@ def sanity_no_zero_dimention(data):
     return np.min(data.shape) != 0
 
 def data_prep(data):
-    print(tfds.as_numpy(data['image']))
-    print(data['file_name'])
-    print(data['label'])
+    # data_feature = {
+    #     'file_name':tf.FixedLenSequenceFeature([], tf.string),
+    #     'image':tf.FixedLenSequenceFeature([], tf.uint8),
+    #     'label':tf.FixedLenFeature([], tf.int64)
+    # }
+    # data = tf.parse_single_example(data, data_feature)
+    # print(tfds.as_numpy(data['image']))
+    image = data['image']
+    print(image)
+    image = tf.image.resize_image_with_crop_or_pad(image, 227, 227)
+    print(image)
+    label = data['label']
     # data_np = tfds.as_numpy(data_in)
     # img_new = scale_and_crop(227, data_np['image'])
 
@@ -61,8 +70,10 @@ def data_prep(data):
     # # prepare label
     # label = data_in['label']
 
-    print('In prep functions')
-    return data
+    # print('In prep functions')
+    print(image)
+    # return tf.data.Dataset.from_tensor_slices((image, label))
+    return image, label
     # print(label)
     # print(file_name)
     # print(image)

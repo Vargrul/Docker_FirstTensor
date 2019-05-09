@@ -1,4 +1,5 @@
 FROM tensorflow/tensorflow:latest-py3
+LABEL maintainer="ksla@create.aau.dk"
 
 EXPOSE 7102
 
@@ -15,18 +16,15 @@ RUN pip3 install -r requirements.txt
 # RUN python3 -m pip install --upgrade pip
 
 COPY ./src /app
-# COPY data /app/data
-
-WORKDIR /app
 
 # Set the working directory to /app
+WORKDIR /app
+
 
 # VOLUME [ "/data", "app" ]
 
 # Copy the current directory contents into the container at /app
 
-CMD [ "python3", "data_prep_helper.py" ]
-# CMD [ "python3", "alexnet_v1.py" ]
+# CMD [ "python3", "data_prep_helper.py" ]
+CMD [ "python3", "alexnet_v1.py" ]
 # CMD [ "python3", "tensortest.py" ]
-
-LABEL maintainer="ksla@create.aau.dk"
