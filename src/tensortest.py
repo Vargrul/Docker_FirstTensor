@@ -1,8 +1,8 @@
 from __future__ import absolute_import, division, print_function
 
 # Add for vscode debugging
-import ptvsd
-ptvsd.enable_attach(address=('0.0.0.0', 7102))
+# import ptvsd
+# ptvsd.enable_attach(address=('0.0.0.0', 7102))
 # ptvsd.wait_for_attach()
 
 # TensorFlow and tf.keras

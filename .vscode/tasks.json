@@ -6,12 +6,12 @@
         {
             "label": "docker_build",
             "type": "shell",
-            "command": "docker build -t testimg ."
+            "command": "docker build -t alexnet_gpu ."
         },
         {
             "label": "docker_debug_run",
             "type": "shell",
-            "command": "docker run --rm -it -d -p 7102:7102/tcp testimg",
+            "command": "docker run --rm -it -d -p 7102:7102/tcp alexnet_gpu",
             "dependsOn": [
                 "docker_build"
             ]
@@ -19,7 +19,7 @@
         {
             "label": "docker_run",
             "type": "shell",
-            "command": "docker run --rm -it -p 7102:7102/tcp -v ~/projects/Docker_FirstTensor/data:/app/data testimg",
+            "command": "docker run --runtime=nvidia --rm -it -p 7102:7102/tcp -v ~/projects/Docker_FirstTensor/data:/app/data alexnet_gpu",
             "dependsOn": [
                 "docker_build"
             ]

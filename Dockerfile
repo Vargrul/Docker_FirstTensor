@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:latest-py3
+FROM tensorflow/tensorflow:latest-gpu-py3
 LABEL maintainer="ksla@create.aau.dk"
 
 EXPOSE 7102
@@ -27,4 +27,4 @@ WORKDIR /app
 
 # CMD [ "python3", "data_prep_helper.py" ]
 CMD [ "python3", "alexnet_v1.py" ]
-# CMD [ "python3", "tensortest.py" ]
+# ENTRYPOINT [ "python3", "tensortest.py" ]
