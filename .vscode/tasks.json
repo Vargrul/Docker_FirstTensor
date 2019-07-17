@@ -11,7 +11,7 @@
         {
             "label": "docker_debug_run",
             "type": "shell",
-            "command": "docker run --rm -it -d -p 7102:7102/tcp alexnet_gpu",
+            "command": "docker run --runtime=nvidia --rm -it -d -p 7102:7102/tcp -v ~/projects/Docker_FirstTensor/data:/app/data alexnet_gpu",
             "dependsOn": [
                 "docker_build"
             ]

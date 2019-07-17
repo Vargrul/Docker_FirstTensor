@@ -7,18 +7,20 @@ ptvsd.enable_attach(address=('0.0.0.0', 7102))
 
 # TensorFlow and tf.keras
 import tensorflow as tf
-from tensorflow.keras import layers
+import tensorflow.keras.layers as layers
 import tensorflow_datasets as tfds
 import data_prep_helper
 
 # Helper libraries
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Set logging to not see warnings about data loading...
 tf.logging.set_verbosity(tf.logging.ERROR)
 
 # Load data
 data_loader, info = tfds.load(name='oxford_flowers102', data_dir='/app/data/', with_info=True)
+
 data_test, data_validation, data_train = data_loader["train"], data_loader["validation"], data_loader['test']
 
 data_train = data_train.map(data_prep_helper.data_prep)
@@ -62,5 +64,26 @@ model.add(tf.keras.layers.Dense(102, activation='softmax'))
 model.summary()
 model.compile(optimizer=tf.train.GradientDescentOptimizer(10e-3), loss=tf.keras.losses.CategoricalCrossentropy(), metrics=['mse','accuracy'])
 
-baseline_history = model.fit(data_train, epochs=15, batch_size=128, steps_per_epoch=48, validation_data=data_validation, validation_steps=8)
-model.evaluate(data_test, steps=8)
+baseline_history = model.fit(data_train, epochs=10, batch_size=1020, steps_per_epoch=6, validation_data=data_validation, validation_steps=1)
+print(baseline_history)
+model.evaluate(data_test, steps=1)
+
+# Create count of the number of epochs
+epoch_count = range(1, len(baseline_history.history['loss']) + 1)
+
+# Visualize loss history
+plt.plot(epoch_count, baseline_history.history['loss'])
+plt.plot(epoch_count, baseline_history.history['val_loss'])
+plt.legend(['Training Loss', 'Test Loss'])
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.savefig("/app/data/loss.png")
+plt.close()
+
+plt.plot(epoch_count, baseline_history.history['acc'])
+plt.plot(epoch_count, baseline_history.history['val_acc'])
+plt.legend(['Training Acc', 'Test Acc'])
+plt.xlabel('Epoch')
+plt.ylabel('Acc')
+plt.savefig("/app/data/acc.png")
+# plt.show();

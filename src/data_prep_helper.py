@@ -8,7 +8,6 @@ from tensorflow.keras import layers
 import tensorflow_datasets as tfds
 
 def scale_and_crop(max_size, data):
-    # data.shape
     # if height is the smalles
     return_data = None
     if data.shape[0] < data.shape[1]:
@@ -63,8 +62,6 @@ if __name__ == "__main__":
     # Load data
     data_loader, info = tfds.load(name='oxford_flowers102', data_dir='/app/data/', with_info=True)
     data_train, data_validation, data_test = data_loader["train"], data_loader["validation"], data_loader['test']
-
-    # print(data_train)
 
     data_train.map(map_func=data_prep)
     # data_train.get_next()
