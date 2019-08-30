@@ -15,8 +15,8 @@ import mnist_reader
 
 # mnist = tf.keras.datasets.mnist
 
-x_train, y_train = mnist_reader.load_mnist('data/mnist', kind='train')
-x_test, y_test = mnist_reader.load_mnist('data/mnist', kind='t10k')
+x_train, y_train = mnist_reader.load_mnist('~/data/fashion-mnist', kind='train')
+x_test, y_test = mnist_reader.load_mnist('~/data/fashion-mnist', kind='t10k')
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
 print(x_train.dtype)
