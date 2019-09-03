@@ -17,6 +17,6 @@ def load_mnist(path, kind='train'):
 
     with gzip.open(images_path, 'rb') as imgpath:
         images = np.frombuffer(imgpath.read(), dtype=np.uint8,
-                               offset=16).reshape(len(labels), 784)
+                               offset=16).reshape(len(labels), 28,28, 1)
 
     return images, labels
