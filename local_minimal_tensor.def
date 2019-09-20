@@ -1,0 +1,7 @@
+Bootstrap: localimage
+From: ./tensorflow_base.sif
+
+%runscript
+    echo 'running container'
+    echo 'running nvidia-smi'
+    nvidia-smi

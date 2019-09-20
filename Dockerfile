@@ -12,7 +12,7 @@ RUN apt update \
 
 COPY requirements.txt .
 
-RUN pip3 install -r requirements.txt
+RUN python3 -m pip install -r requirements.txt
 # RUN python3 -m pip install --upgrade pip
 
 COPY ./src /app
@@ -26,5 +26,5 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 
 # CMD [ "python3", "data_prep_helper.py" ]
-CMD [ "python3", "alexnet_v1.py" ]
+CMD [ "python3", "tensortest.py" ]
 # ENTRYPOINT [ "python3", "tensortest.py" ]

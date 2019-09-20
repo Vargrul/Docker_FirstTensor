@@ -1,0 +1,7 @@
+Bootstrap: docker
+From: nvcr.io/nvidia/tensorflow:19.03-py3
+
+%runscript
+    echo 'running container'
+    echo 'running nvidia-smi'
+    nvidia-smi
